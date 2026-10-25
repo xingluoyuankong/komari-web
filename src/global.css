@@ -555,3 +555,234 @@ input[placeholder*="搜索"]:focus {
 .km-layout {
   background-color: transparent !important;
 }
+
+/* ============================================================
+   Forest Mist — 有机自然
+   远山 / 晨雾 / 树冠漏光 / 亚麻纸卡片 / 苔藓描边 / 叶片
+   ============================================================ */
+
+:root {
+  --forest-rgb: 107, 143, 94;
+  --forest-deep-rgb: 61, 90, 58;
+  --clay-rgb: 201, 168, 130;
+}
+
+html {
+  background-color: #eef2e4;
+}
+.dark html {
+  background-color: #10160f;
+}
+
+/* 天光从右上漏下来，左下是冷色雾，底部压一层草地 */
+body {
+  background-color: #f4f3ea;
+  background-image:
+    radial-gradient(ellipse 60% 34% at 82% -6%, rgba(246, 232, 176, 0.45) 0%, transparent 70%),
+    radial-gradient(ellipse 70% 40% at 6% -10%, rgba(176, 208, 222, 0.5) 0%, transparent 72%),
+    radial-gradient(ellipse 120% 50% at 50% 52%, rgba(255, 255, 255, 0.55) 0%, transparent 76%),
+    linear-gradient(180deg, #f2f6f4 0%, #f6f5ec 32%, #edf1e2 64%, #dde7cf 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.dark body {
+  background-color: #0f150e;
+  background-image:
+    radial-gradient(ellipse 60% 34% at 82% -6%, rgba(180, 160, 90, 0.16) 0%, transparent 70%),
+    radial-gradient(ellipse 70% 40% at 6% -10%, rgba(90, 130, 150, 0.2) 0%, transparent 72%),
+    linear-gradient(180deg, #131a12 0%, #0e140d 60%, #0a0f09 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* 远山固定在视口底部 */
+body::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 150px;
+  background: url("/hills.svg") no-repeat bottom center;
+  background-size: 100% 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.km-layout {
+  position: relative;
+  z-index: 1;
+  background-color: transparent !important;
+}
+
+/* 卡片：亚麻纸 + 有机不对称圆角 + 苔藓描边 */
+.rt-Card {
+  border-radius: 26px 10px 26px 10px !important;
+  border: 1px solid rgba(var(--forest-rgb), 0.24) !important;
+  background-color: transparent !important;
+  background-image:
+    repeating-linear-gradient(94deg, rgba(120, 100, 70, 0.016) 0 1px, transparent 1px 4px),
+    repeating-linear-gradient(4deg, rgba(120, 100, 70, 0.012) 0 1px, transparent 1px 5px),
+    linear-gradient(168deg, rgba(255, 253, 247, 0.97) 0%, rgba(242, 239, 227, 0.94) 100%) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 2px 4px -2px rgba(var(--forest-deep-rgb), 0.1),
+    0 18px 34px -24px rgba(var(--forest-deep-rgb), 0.55) !important;
+  transition: transform 0.3s cubic-bezier(0.22, 0.9, 0.28, 1), box-shadow 0.3s, border-color 0.3s;
+}
+
+.dark .rt-Card {
+  background-image:
+    repeating-linear-gradient(94deg, rgba(255, 255, 255, 0.012) 0 1px, transparent 1px 4px),
+    linear-gradient(168deg, rgba(26, 34, 24, 0.96) 0%, rgba(18, 25, 17, 0.94) 100%) !important;
+  border-color: rgba(var(--forest-rgb), 0.18) !important;
+}
+
+.rt-Card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(var(--forest-rgb), 0.5) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 24px 42px -26px rgba(var(--forest-deep-rgb), 0.6) !important;
+}
+
+/* 摘要卡：左侧陶土色书脊，像一本自然手账 */
+.km-summary-card {
+  position: relative;
+  overflow: hidden;
+}
+.km-summary-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(180deg, rgba(var(--clay-rgb), 0.9) 0%, rgba(var(--forest-rgb), 0.85) 50%, rgba(var(--forest-deep-rgb), 0.8) 100%);
+  pointer-events: none;
+}
+
+/* 节点卡片：右上角叶片 + 底部苔痕 */
+.km-node-card {
+  position: relative;
+  overflow: hidden;
+}
+.km-node-card::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  width: 40px;
+  height: 40px;
+  background: url("/leaf.svg") no-repeat center / contain;
+  opacity: 0.9;
+  pointer-events: none;
+  transform: rotate(-8deg);
+}
+.km-node-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 46px;
+  background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(var(--forest-rgb), 0.07) 0%, transparent 72%);
+  pointer-events: none;
+}
+
+/* 进度条 */
+.km-usage-bar-track {
+  background: rgba(var(--forest-rgb), 0.14) !important;
+  border-radius: 999px !important;
+  box-shadow: 0 1px 2px rgba(var(--forest-deep-rgb), 0.08) inset;
+}
+.km-usage-bar-track > div {
+  border-radius: 999px !important;
+}
+
+/* 顶栏：亚麻布带 */
+.km-navbar {
+  background: rgba(250, 249, 242, 0.82) !important;
+  backdrop-filter: blur(12px) saturate(1.1);
+  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+  border-bottom: 1px solid rgba(var(--forest-rgb), 0.22);
+}
+
+/* 站点名：墨绿到苔藓，像树影 */
+.km-navbar-brand > a > span {
+  background: linear-gradient(96deg, #2f4a2c 0%, #4e7043 42%, #6b8f5e 68%, #2f4a2c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dark .km-navbar-brand > a > span {
+  background: linear-gradient(96deg, #a9c79a 0%, #d3e3bd 48%, #8fb27c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 摘要数字：树皮棕 */
+.km-top-card label.font-medium {
+  color: #3d5a3a;
+}
+.dark .km-top-card label.font-medium {
+  color: #c3d9ae;
+}
+
+/* 搜索框：鹅卵石 */
+input[type="search"],
+.km-search input,
+input[placeholder*="搜索"] {
+  border-radius: 999px !important;
+  border: 1px solid rgba(var(--forest-rgb), 0.3) !important;
+  background: rgba(255, 254, 248, 0.85) !important;
+  box-shadow: 0 1px 3px rgba(var(--forest-deep-rgb), 0.08) inset;
+}
+input[type="search"]:focus,
+.km-search input:focus,
+input[placeholder*="搜索"]:focus {
+  border-color: rgba(var(--forest-rgb), 0.8) !important;
+  box-shadow: 0 0 0 3px rgba(var(--forest-rgb), 0.16);
+  outline: none;
+}
+
+.rt-Button,
+.rt-Badge,
+.km-node-status {
+  border-radius: 999px !important;
+}
+.km-node-status {
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(var(--forest-deep-rgb), 0.16);
+}
+
+.km-callout {
+  border-radius: 18px 6px 18px 6px !important;
+}
+
+.rt-Text,
+.km-top-card label,
+.km-usage-bar label {
+  font-variant-numeric: tabular-nums;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--forest-rgb), 0.45) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(var(--forest-rgb), 0.42);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--forest-rgb), 0.7);
+}
+
+::selection {
+  background: rgba(var(--forest-rgb), 0.35);
+  color: #22301f;
+}
