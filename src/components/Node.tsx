@@ -272,6 +272,38 @@ const Node = React.memo(
               </Text>
             )}
           </Flex>
+          <Flex justify="between" hidden={isMobile}>
+            <Text size="2" color="gray">
+              {t("nodeCard.load")}
+            </Text>
+            {online ? (
+              <Text size="2">
+                {(liveData.load?.load1 ?? 0).toFixed(2)} /{" "}
+                {(liveData.load?.load5 ?? 0).toFixed(2)} /{" "}
+                {(liveData.load?.load15 ?? 0).toFixed(2)}
+              </Text>
+            ) : (
+              <Text size="2" color="gray">
+                -
+              </Text>
+            )}
+          </Flex>
+          <Flex justify="between" hidden={isMobile}>
+            <Text size="2" color="gray">
+              {t("nodeCard.connections")}
+            </Text>
+            {online ? (
+              <Text size="2">
+                TCP {liveData.connections?.tcp ?? 0} · UDP{" "}
+                {liveData.connections?.udp ?? 0} · {t("nodeCard.process")}{" "}
+                {liveData.process ?? 0}
+              </Text>
+            ) : (
+              <Text size="2" color="gray">
+                -
+              </Text>
+            )}
+          </Flex>
         </Flex>
         <PriceTags
           hidden={!isMobile}

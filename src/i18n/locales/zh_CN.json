@@ -770,6 +770,8 @@
     "kernelVersion": "内核版本",
     "last_updated": "最后上报",
     "load": "负载",
+    "connections": "连接数",
+    "process": "进程数",
     "monitoring": "监控信息",
     "name": "节点名称",
     "networkDownloadSpeed": "下载速度",
@@ -1661,6 +1663,6 @@
   "view": {
     "mode": "显示模式"
   },
-  "warn_https": "当前连接不是 HTTPS！您的敏感数据存在严重风险。请立即采取措施确保连接安全！复制操作可能无法使用！",
+  "warn_https": "当前连接非 HTTPS，敏感数据有风险，复制功能可能不可用。",
   "warn_websocket": "RPC2 请求失败，请检查网络连接或服务器状态！"
 }

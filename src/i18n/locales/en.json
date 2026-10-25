@@ -790,6 +790,8 @@
     "kernelVersion": "Kernel Version",
     "last_updated": "Last Update",
     "load": "Load",
+    "connections": "Connections",
+    "process": "Processes",
     "monitoring": "Monitoring",
     "name": "Node Name",
     "networkDownloadSpeed": "Download Speed",
@@ -1631,6 +1633,6 @@
   "view": {
     "mode": "View Mode"
   },
-  "warn_https": "The current connection is not HTTPS! Your sensitive data is at serious risk. Take immediate action to secure the connection! Copy may not available!",
+  "warn_https": "This connection is not HTTPS. Sensitive data is at risk and copy may not work.",
   "warn_websocket": "RPC2 request failed, please check the network connection or server status!"
 }
