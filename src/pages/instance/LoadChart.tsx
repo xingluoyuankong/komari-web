@@ -211,7 +211,13 @@ const DEFAULT_DASHBOARD: DashboardChart[] = [
   {
     id: "cpu",
     title: "CPU",
-    metrics: ["cpu.usage", "load.average"],
+    metrics: ["cpu.usage"],
+    size: "small",
+  },
+  {
+    id: "load",
+    title: "Load",
+    metrics: ["load.average"],
     size: "small",
   },
   {
@@ -235,6 +241,12 @@ const DEFAULT_DASHBOARD: DashboardChart[] = [
       "net.total.down",
       "net.total.up",
     ],
+    size: "large",
+  },
+  {
+    id: "connections",
+    title: "Connections",
+    metrics: ["connections.tcp", "connections.udp", "process.count"],
     size: "large",
   },
   {
@@ -909,6 +921,20 @@ const normalizeDashboard = (value: unknown): DashboardChart[] => {
     }));
 };
 
+// 已保存的图表配置（后端 theme_settings 或旧版本遗留）不会自动获得新增的
+// 默认图表，这里按 id 补齐，保证升级后 Load / Connections 能直接出现。
+const withDefaultCharts = (charts: DashboardChart[]): DashboardChart[] => {
+  const ids = new Set(charts.map((chart) => chart.id));
+  const missing = DEFAULT_DASHBOARD.filter((chart) => !ids.has(chart.id));
+  if (missing.length === 0) return charts;
+  const merged = [...charts];
+  for (const chart of missing) {
+    const anchor = DEFAULT_DASHBOARD.findIndex((item) => item.id === chart.id);
+    merged.splice(Math.min(anchor, merged.length), 0, chart);
+  }
+  return merged;
+};
+
 const parseDashboardTemplate = (value: unknown): DashboardChart[] => {
   if (Array.isArray(value)) return normalizeDashboard(value);
   if (typeof value !== "string" || value.trim() === "") return DEFAULT_DASHBOARD;
@@ -1002,7 +1028,10 @@ const LoadChart = ({ data = [], onRealtimeActiveChange }: LoadChartProps) => {
   const [dashboard, setDashboard] = useState<DashboardChart[]>(() =>
     parseDashboardTemplate(globalDashboardTemplate),
   );
-  const charts = useMemo(() => normalizeDashboard(dashboard), [dashboard]);
+  const charts = useMemo(
+    () => withDefaultCharts(normalizeDashboard(dashboard)),
+    [dashboard],
+  );
   const [savingGlobalTemplate, setSavingGlobalTemplate] = useState(false);
   const [pingTasks, setPingTasks] = useState<PublicPingTask[]>([]);
   const [pingStats, setPingStats] = useState<PingMetricStat[]>([]);

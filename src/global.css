@@ -277,3 +277,281 @@ body, * {
 .km-login-card {
   border-radius: 8px;
 }
+
+
+/* ============================================================
+   Y2K Organic Green — 绿色清新 / 有机自然 / 千禧光泽
+   仅覆盖视觉层，不动布局与交互逻辑
+   ============================================================ */
+
+:root {
+  --y2k-leaf-rgb: 126, 217, 168;
+  --y2k-deep-rgb: 31, 122, 77;
+  --y2k-lime-rgb: 201, 242, 122;
+  --y2k-radius: 20px;
+}
+
+/* html 兜底底色：full-page 截图或超长页面时不会露出白底 */
+html {
+  background-color: #bfe6d1;
+}
+.dark html {
+  background-color: #0b1310;
+}
+
+/* 页面底色：薄荷光晕 + 柠檬斜阳 + 天蓝反光 + 千禧细网格 */
+body {
+  background-color: #bfe6d1;
+  background-image:
+    linear-gradient(rgba(126, 217, 168, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(126, 217, 168, 0.055) 1px, transparent 1px),
+    radial-gradient(920px 500px at 8% -10%, rgba(167, 236, 197, 0.8) 0%, transparent 62%),
+    radial-gradient(780px 430px at 93% -8%, rgba(201, 242, 122, 0.55) 0%, transparent 58%),
+    radial-gradient(720px 540px at 48% 112%, rgba(178, 226, 255, 0.65) 0%, transparent 64%),
+    linear-gradient(180deg, #cdeedc 0%, #aaddc0 100%);
+  background-size: 32px 32px, 32px 32px, auto, auto, auto, auto;
+  background-attachment: fixed;
+}
+
+.dark body {
+  background-color: #0b1310;
+  background-image:
+    linear-gradient(rgba(126, 217, 168, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(126, 217, 168, 0.045) 1px, transparent 1px),
+    radial-gradient(920px 500px at 8% -10%, rgba(31, 122, 77, 0.34) 0%, transparent 62%),
+    radial-gradient(780px 430px at 93% -8%, rgba(88, 150, 60, 0.2) 0%, transparent 58%),
+    linear-gradient(180deg, #0e1815 0%, #0a1210 100%);
+  background-size: 32px 32px, 32px 32px, auto, auto, auto;
+  background-attachment: fixed;
+}
+
+/* 卡片：半透明玻璃，让底层绿意透上来 */
+.rt-Card {
+  border-radius: var(--y2k-radius) !important;
+  border: 1px solid rgba(var(--y2k-leaf-rgb), 0.55) !important;
+  background-color: transparent !important;
+  background-image: linear-gradient(
+    180deg,
+    rgba(248, 254, 251, 0.78) 0%,
+    rgba(186, 230, 208, 0.66) 100%
+  ) !important;
+  backdrop-filter: blur(12px) saturate(1.2);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 14px 30px -18px rgba(var(--y2k-deep-rgb), 0.45),
+    0 2px 8px -4px rgba(var(--y2k-deep-rgb), 0.16) !important;
+  transition:
+    transform 0.22s cubic-bezier(0.2, 0.85, 0.3, 1),
+    box-shadow 0.22s,
+    border-color 0.22s;
+}
+
+.dark .rt-Card {
+  background-image: linear-gradient(
+    180deg,
+    rgba(24, 38, 31, 0.82) 0%,
+    rgba(16, 27, 22, 0.78) 100%
+  ) !important;
+  border-color: rgba(var(--y2k-leaf-rgb), 0.24) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 14px 30px -20px rgba(0, 0, 0, 0.8) !important;
+}
+
+.rt-Card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(var(--y2k-leaf-rgb), 0.85) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 22px 40px -20px rgba(var(--y2k-deep-rgb), 0.55),
+    0 4px 10px -4px rgba(var(--y2k-deep-rgb), 0.2) !important;
+}
+
+/* 摘要卡：顶部荧光光带 */
+.km-summary-card {
+  position: relative;
+  overflow: hidden;
+}
+.km-summary-card::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(126, 217, 168, 1),
+    rgba(201, 242, 122, 1),
+    rgba(126, 217, 168, 1),
+    transparent
+  );
+  pointer-events: none;
+}
+
+/* 节点卡片：右上角星芒 + 悬停光泽扫过 */
+.km-node-card {
+  position: relative;
+  overflow: hidden;
+}
+.km-node-card::after {
+  content: "✦";
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  font-size: 11px;
+  line-height: 1;
+  color: rgba(var(--y2k-leaf-rgb), 0.85);
+  text-shadow: 0 0 6px rgba(var(--y2k-leaf-rgb), 0.7);
+  pointer-events: none;
+}
+.km-node-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.55) 48%,
+    transparent 62%
+  );
+  transform: translateX(-130%);
+  transition: transform 0.85s ease;
+  pointer-events: none;
+}
+.km-node-card:hover::before {
+  transform: translateX(130%);
+}
+
+/* 进度条：柔和轨道 + 圆润本体 */
+.km-usage-bar-track {
+  background: rgba(var(--y2k-leaf-rgb), 0.2) !important;
+  border-radius: 999px !important;
+}
+.km-usage-bar-track > div {
+  border-radius: 999px !important;
+}
+
+/* 数字等宽对齐 */
+.rt-Text,
+.km-top-card label,
+.km-usage-bar label {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 滚动条：薄荷细条 */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--y2k-leaf-rgb), 0.6) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(var(--y2k-leaf-rgb), 0.55);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(var(--y2k-leaf-rgb), 0.85);
+}
+
+/* 选中文字：淡薄荷 */
+::selection {
+  background: rgba(var(--y2k-leaf-rgb), 0.5);
+  color: #0b2a1b;
+}
+
+/* 顶栏：半透明玻璃条 */
+.km-navbar {
+  background: rgba(255, 255, 255, 0.72) !important;
+  backdrop-filter: blur(14px) saturate(1.25);
+  -webkit-backdrop-filter: blur(14px) saturate(1.25);
+  border-bottom: 1px solid rgba(var(--y2k-leaf-rgb), 0.4);
+}
+
+/* 站点名：绿 → 柠檬的千禧渐变字 */
+.km-navbar-brand > a > span {
+  background: linear-gradient(
+    100deg,
+    #14603c 0%,
+    #2f9c68 38%,
+    #7fce3f 66%,
+    #14603c 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.01em;
+}
+
+.dark .km-navbar-brand > a > span {
+  background: linear-gradient(
+    100deg,
+    #8fe9b8 0%,
+    #c9f27a 45%,
+    #6fd39c 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* 摘要数字：有机绿 + 轻微发光 */
+.km-top-card label.font-medium {
+  color: #14603c;
+}
+.dark .km-top-card label.font-medium {
+  color: #9defc1;
+}
+
+/* 搜索框：胶囊 + 柔和内阴影 */
+input[type="search"],
+.km-search input,
+input[placeholder*="搜索"] {
+  border-radius: 999px !important;
+  border: 1px solid rgba(var(--y2k-leaf-rgb), 0.45) !important;
+  background: rgba(255, 255, 255, 0.7) !important;
+  box-shadow: 0 1px 2px rgba(var(--y2k-deep-rgb), 0.08) inset;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+input[type="search"]:focus,
+.km-search input:focus,
+input[placeholder*="搜索"]:focus {
+  border-color: rgba(var(--y2k-leaf-rgb), 0.95) !important;
+  box-shadow: 0 0 0 3px rgba(var(--y2k-leaf-rgb), 0.25);
+  outline: none;
+}
+
+/* 按钮：胶囊化 + 铬面高光 */
+.rt-Button {
+  border-radius: 999px !important;
+}
+.rt-Button:not([disabled]):hover {
+  box-shadow: 0 4px 14px -6px rgba(var(--y2k-deep-rgb), 0.5);
+}
+
+/* 徽标/标签：柔和胶囊 */
+.rt-Badge {
+  border-radius: 999px !important;
+}
+
+/* 提示条：圆角化 */
+.km-callout {
+  border-radius: 14px !important;
+}
+
+/* 在线状态徽标：荧光胶囊 + 光晕 */
+.km-node-status {
+  border-radius: 999px !important;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow:
+    0 0 0 1px rgba(var(--y2k-leaf-rgb), 0.5),
+    0 0 12px rgba(var(--y2k-leaf-rgb), 0.4);
+}
+
+/* 布局容器原本带近似白底，会盖住 body 的有机渐变 */
+.km-layout {
+  background-color: transparent !important;
+}

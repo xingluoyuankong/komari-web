@@ -13,11 +13,14 @@ const UsageBar = React.memo(
     // Ensure value is between 0 and 100
     const clampedValue = Math.min(Math.max(value, 0), max);
 
-    // Determine color based on thresholds
+    // Determine color based on thresholds.
+    // 95% 以上用深红（-11 档）以便和 80% 的红（-9 档）区分开，
+    // 扫一眼就能分出"偏高"和"快满了"。
     const getColor = (val: number) => {
-      if (val >= 80) return "red";
-      if (val >= 60) return "orange";
-      return "green";
+      if (val >= 95) return "var(--red-11)";
+      if (val >= 80) return "var(--red-9)";
+      if (val >= 60) return "var(--orange-9)";
+      return "var(--green-9)";
     };
 
     const barColor = getColor(clampedValue);
@@ -39,7 +42,7 @@ const UsageBar = React.memo(
             <div
               style={{
                 height: "100%",
-                backgroundColor: `var(--${barColor}-9)`,
+                backgroundColor: barColor,
                 borderRadius: "3px",
                 width: "100%",
                 transform: `scaleX(${clampedValue / 100})`,
@@ -61,7 +64,15 @@ const UsageBar = React.memo(
           <Text size="2" color="gray">
             {label}
           </Text>
-          <Text size="2" weight="medium">
+          <Text
+            size="2"
+            weight="medium"
+            style={
+              clampedValue >= 80
+                ? { color: barColor, fontWeight: 600 }
+                : undefined
+            }
+          >
             {clampedValue.toFixed(1)}%
           </Text>
         </Flex>
@@ -78,7 +89,7 @@ const UsageBar = React.memo(
           <div
             style={{
               height: "100%",
-              backgroundColor: `var(--${barColor}-9)`,
+              backgroundColor: barColor,
               borderRadius: "4px",
               width: "100%",
               transform: `scaleX(${clampedValue / 100})`,
