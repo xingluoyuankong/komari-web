@@ -1265,3 +1265,39 @@ input[placeholder*="搜索"]:focus {
 .km-dots-loss i.on {
   background: linear-gradient(180deg, #e58a76, #c0442f);
 }
+
+/* ---------- 窄屏：操作列固定在右侧，不用横滑就能点到编辑 ---------- */
+@media (max-width: 900px) {
+  .km-ui-table th:last-child,
+  .km-ui-table td:last-child {
+    position: sticky;
+    right: 0;
+    z-index: 3;
+    background: #fdfaf1;
+    box-shadow: -10px 0 12px -10px rgba(var(--forest-deep-rgb), 0.28);
+  }
+
+  .dark .km-ui-table th:last-child,
+  .dark .km-ui-table td:last-child {
+    background: #18221a;
+  }
+
+  /* 首列（复选框 + 名称）也固定，横向滚动时不丢上下文 */
+  .km-ui-table th:first-child,
+  .km-ui-table td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    background: #fdfaf1;
+  }
+
+  .dark .km-ui-table th:first-child,
+  .dark .km-ui-table td:first-child {
+    background: #18221a;
+  }
+
+  /* 表格容器给点底部余量，避免最后一行贴着边缘 */
+  .km-ui-table {
+    margin-bottom: 4px;
+  }
+}
