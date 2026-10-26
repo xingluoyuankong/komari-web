@@ -1181,3 +1181,87 @@ input[placeholder*="搜索"]:focus {
 .km-node-group-name {
   white-space: nowrap;
 }
+
+/* ---------- 延迟 / 丢包：三网点阵 ---------- */
+.km-ping-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.km-ping-block {
+  padding: 7px 9px;
+  border-radius: 12px 5px 12px 5px;
+  background: rgba(255, 253, 246, 0.72);
+  border: 1px solid rgba(var(--forest-rgb), 0.2);
+  min-width: 0;
+}
+
+.km-ping-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.km-ping-title {
+  font-size: 10.5px;
+  color: #6b6350;
+  letter-spacing: 0.03em;
+}
+
+.km-ping-tag {
+  font-size: 9.5px;
+  color: #a49b88;
+}
+
+.km-ping-line {
+  display: grid;
+  grid-template-columns: 6px 26px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 4px;
+  font-size: 10.5px;
+  line-height: 1.7;
+}
+
+.km-ping-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #4caf6e;
+  box-shadow: 0 0 4px rgba(76, 175, 110, 0.5);
+}
+
+.km-ping-name {
+  color: #6b6350;
+  white-space: nowrap;
+}
+
+.km-ping-value {
+  color: #3d3a30;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.km-dots {
+  display: inline-flex;
+  gap: 1.5px;
+  align-items: center;
+}
+
+.km-dots i {
+  width: 3px;
+  height: 8px;
+  border-radius: 1px;
+  background: rgba(120, 100, 70, 0.13);
+}
+
+.km-dots-latency i.on {
+  background: linear-gradient(180deg, #86cf9a, #4a9d5f);
+}
+
+.km-dots-loss i.on {
+  background: linear-gradient(180deg, #e58a76, #c0442f);
+}
