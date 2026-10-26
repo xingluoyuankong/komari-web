@@ -1141,3 +1141,43 @@ input[placeholder*="搜索"]:focus {
   font-weight: 700;
   letter-spacing: -0.01em;
 }
+
+/* ---------- 分组选择器：苔藓胶囊 ---------- */
+.km-node-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  margin: 0 16px 8px;
+  border-radius: 999px;
+  background: rgba(251, 246, 232, 0.82);
+  border: 1px solid rgba(var(--forest-rgb), 0.26);
+  box-shadow: 0 8px 20px -18px rgba(var(--forest-deep-rgb), 0.6);
+  width: fit-content;
+  max-width: calc(100% - 32px);
+}
+
+.km-node-group .rt-SegmentedControlRoot,
+.km-node-group [role="radiogroup"] {
+  background: transparent !important;
+  gap: 4px;
+}
+
+.km-node-group .rt-SegmentedControlItem,
+.km-node-group [role="radio"] {
+  border-radius: 999px !important;
+  padding: 2px 12px !important;
+  color: #6b6350;
+  transition: background 0.2s, color 0.2s;
+}
+
+.km-node-group .rt-SegmentedControlItem[data-state="checked"],
+.km-node-group [role="radio"][data-state="checked"] {
+  background: linear-gradient(135deg, #6b8f5e 0%, #4a7d54 100%) !important;
+  color: #fdfbf4 !important;
+  box-shadow: 0 2px 8px -4px rgba(var(--forest-deep-rgb), 0.8);
+}
+
+.km-node-group-name {
+  white-space: nowrap;
+}
