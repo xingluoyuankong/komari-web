@@ -321,7 +321,8 @@ export const NodeGrid = ({ nodes, liveData, onlineSet }: NodeGridProps) => {
       className="km-node-list gap-2 md:gap-4"
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+        gridTemplateColumns: "repeat(auto-fit, minmax(340px, 420px))",
+        justifyContent: "center",
         padding: "1rem",
         width: "100%",
         boxSizing: "border-box",

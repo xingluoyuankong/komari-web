@@ -952,20 +952,35 @@ input[placeholder*="搜索"]:focus {
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 12px;
+  font-size: 12.5px;
   line-height: 1.3;
 }
 
 .km-metric-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex: none;
 }
-.km-tone-sky .km-metric-icon { color: #4a7fa8; }
-.km-tone-moss .km-metric-icon { color: #4a9d5f; }
-.km-tone-clay .km-metric-icon { color: #b3763a; }
-.km-tone-plum .km-metric-icon { color: #7a5a9c; }
+.km-tone-sky .km-metric-icon {
+  color: #3d6f96;
+  background: rgba(74, 127, 168, 0.14);
+}
+.km-tone-moss .km-metric-icon {
+  color: #3d8a52;
+  background: rgba(74, 157, 95, 0.15);
+}
+.km-tone-clay .km-metric-icon {
+  color: #a06428;
+  background: rgba(179, 118, 58, 0.15);
+}
+.km-tone-plum .km-metric-icon {
+  color: #6a4a8c;
+  background: rgba(122, 90, 156, 0.14);
+}
 
 .km-metric-label {
   flex: 1;
@@ -996,7 +1011,7 @@ input[placeholder*="搜索"]:focus {
 }
 
 .km-metric-detail {
-  font-size: 10.5px;
+  font-size: 11px;
   line-height: 1.35;
   color: #8a8270;
   white-space: nowrap;
@@ -1032,7 +1047,7 @@ input[placeholder*="搜索"]:focus {
 }
 
 .km-tile-label {
-  font-size: 10px;
+  font-size: 10.5px;
   color: #8a8270;
   letter-spacing: 0.03em;
   white-space: nowrap;
@@ -1057,4 +1072,72 @@ input[placeholder*="搜索"]:focus {
 .km-conn-row {
   border-top: 1px dashed rgba(var(--forest-rgb), 0.22);
   padding-top: 6px;
+}
+
+/* ---------- 页脚：压成一行淡字，像书末的版权页 ---------- */
+.km-footer {
+  background: transparent !important;
+  border-top: 1px dashed rgba(var(--forest-rgb), 0.22) !important;
+  padding: 12px 16px 16px !important;
+  margin-top: 18px;
+}
+.km-footer > .rt-Flex {
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: wrap !important;
+  gap: 8px 18px !important;
+}
+.km-footer > .rt-Flex > .rt-Flex {
+  flex-direction: row !important;
+  align-items: center !important;
+  gap: 14px !important;
+}
+.km-footer .rt-Text {
+  font-size: 11px !important;
+  color: #8a8270 !important;
+  letter-spacing: 0.02em;
+}
+.km-footer > .rt-Flex > .rt-Flex:last-child {
+  display: none;
+}
+
+/* ---------- HTTPS 提示条：从刺眼的粉红改成柔和陶土 ---------- */
+.km-callout-https {
+  background: rgba(250, 243, 228, 0.92) !important;
+  border: 1px solid rgba(var(--clay-rgb), 0.55) !important;
+  border-radius: 16px 6px 16px 6px !important;
+  box-shadow: 0 6px 18px -14px rgba(var(--clay-rgb), 0.8);
+}
+.km-callout-https .rt-Text,
+.km-callout-https span,
+.km-callout-https svg {
+  color: #8a5a2b !important;
+  fill: currentColor;
+}
+
+/* ---------- 摘要卡：补一条苔线，与节点卡呼应 ---------- */
+.km-summary-card {
+  position: relative;
+  overflow: hidden;
+}
+.km-summary-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    rgba(var(--clay-rgb), 0.85) 0%,
+    rgba(var(--forest-rgb), 0.9) 55%,
+    rgba(var(--forest-deep-rgb), 0.85) 100%
+  );
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* 摘要卡里的数字再重一点 */
+.km-top-card label.font-medium {
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
