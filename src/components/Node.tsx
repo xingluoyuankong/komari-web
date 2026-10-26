@@ -315,11 +315,11 @@ const Node = React.memo(
                     className={`km-ping-value${stat.avg != null && stat.avg > 0 ? "" : " km-ping-na"}`}
                   >
                     {stat.avg != null && stat.avg > 0
-                      ? `${((stat.loss ?? 0) * 100).toFixed(1)}%`
+                      ? `${(stat.loss ?? 0).toFixed(1)}%`
                       : "—"}
                   </span>
                   <DotBar
-                    value={stat.avg != null && stat.avg > 0 ? (stat.loss ?? 0) * 100 : 0}
+                    value={stat.avg != null && stat.avg > 0 ? (stat.loss ?? 0) : 0}
                     max={100}
                     tone="loss"
                   />
