@@ -619,7 +619,7 @@ body::after {
 /* 卡片：亚麻纸 + 有机不对称圆角 + 苔藓描边 */
 .rt-Card {
   border-radius: 26px 10px 26px 10px !important;
-  border: 1px solid rgba(var(--forest-rgb), 0.24) !important;
+  border: 1px solid rgba(var(--forest-rgb), 0.3) !important;
   background-color: transparent !important;
   background-image:
     repeating-linear-gradient(94deg, rgba(120, 100, 70, 0.016) 0 1px, transparent 1px 4px),
@@ -628,7 +628,8 @@ body::after {
   box-shadow:
     0 1px 0 rgba(255, 255, 255, 0.95) inset,
     0 2px 4px -2px rgba(var(--forest-deep-rgb), 0.1),
-    0 18px 34px -24px rgba(var(--forest-deep-rgb), 0.55) !important;
+    0 3px 6px -3px rgba(var(--forest-deep-rgb), 0.14),
+    0 20px 38px -22px rgba(var(--forest-deep-rgb), 0.62) !important;
   transition: transform 0.3s cubic-bezier(0.22, 0.9, 0.28, 1), box-shadow 0.3s, border-color 0.3s;
 }
 
@@ -661,32 +662,102 @@ body::after {
   pointer-events: none;
 }
 
-/* 节点卡片：右上角叶片 + 底部苔痕 */
+
+/* ---------- 节点卡片：暖米纸 + 顶部苔线 + 右下叶片 ---------- */
+
 .km-node-card {
   position: relative;
   overflow: hidden;
+  padding: 20px 18px 18px !important;
+  background-image:
+    repeating-linear-gradient(92deg, rgba(120, 100, 70, 0.022) 0 1px, transparent 1px 5px),
+    repeating-linear-gradient(2deg, rgba(120, 100, 70, 0.016) 0 1px, transparent 1px 6px),
+    linear-gradient(168deg, #fbf6e8 0%, #f4edd8 52%, #ece4cc 100%) !important;
 }
-.km-node-card::after {
-  content: "";
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  width: 40px;
-  height: 40px;
-  background: url("/leaf.svg") no-repeat center / contain;
-  opacity: 0.9;
-  pointer-events: none;
-  transform: rotate(-8deg);
-}
+
+/* 顶部苔藓细线，代替厚重的铭牌色带 */
 .km-node-card::before {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 46px;
-  background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(var(--forest-rgb), 0.07) 0%, transparent 72%);
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: linear-gradient(
+    90deg,
+    rgba(var(--clay-rgb), 0.9) 0%,
+    rgba(var(--forest-rgb), 0.95) 45%,
+    rgba(var(--forest-deep-rgb), 0.9) 100%
+  );
   pointer-events: none;
+  z-index: 2;
+}
+
+/* 右下角叶片，避开顶部的节点名与状态 */
+.km-node-card::after {
+  content: "";
+  position: absolute;
+  right: -10px;
+  bottom: -12px;
+  width: 78px;
+  height: 78px;
+  background: url("/leaf.svg") no-repeat center / contain;
+  opacity: 0.55;
+  pointer-events: none;
+  transform: rotate(14deg);
+  z-index: 0;
+}
+
+.km-node-card > div {
+  position: relative;
+  z-index: 1;
+}
+
+.km-node-card:hover {
+  transform: translateY(-4px) rotate(-0.25deg);
+  border-color: rgba(var(--forest-rgb), 0.55) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.95) inset,
+    0 26px 46px -26px rgba(var(--forest-deep-rgb), 0.62) !important;
+}
+
+.km-node-card .km-node-name {
+  color: #2f4a2c;
+  letter-spacing: 0.01em;
+}
+.dark .km-node-card .km-node-name {
+  color: #cfe3bb;
+}
+
+.km-node-card .km-node-status {
+  border: 1px solid rgba(var(--forest-rgb), 0.35);
+  background-color: rgba(238, 246, 228, 0.9) !important;
+  color: #35592f !important;
+}
+
+.km-node-card .rt-Separator {
+  background-color: transparent !important;
+  border-top: 1px dashed rgba(var(--forest-rgb), 0.28) !important;
+  height: 0 !important;
+}
+
+.km-node-card .rt-Text {
+  font-feature-settings: "tnum" 1;
+}
+
+.km-node-card .km-usage-bar-track {
+  height: 10px !important;
+  background: rgba(var(--forest-rgb), 0.13) !important;
+  border-radius: 999px !important;
+  box-shadow: 0 1px 2px rgba(var(--forest-deep-rgb), 0.1) inset;
+}
+.km-node-card .km-usage-bar-track > div {
+  border-radius: 999px !important;
+  box-shadow:/n    0 1px 0 rgba(255, 255, 255, 0.5) inset,
+    0 0 6px -2px rgba(var(--forest-rgb), 0.55);
+}
+
+.km-node-card .km-usage-bar .rt-Text:first-child {
+  letter-spacing: 0.04em;
+  color: #6b6350;
 }
 
 /* 进度条 */
@@ -785,4 +856,205 @@ input[placeholder*="搜索"]:focus {
 ::selection {
   background: rgba(var(--forest-rgb), 0.35);
   color: #22301f;
+}
+
+/* 摘要卡与控制栏统一成同一张纸 */
+.km-summary-card {
+  background-image:
+    repeating-linear-gradient(92deg, rgba(120, 100, 70, 0.022) 0 1px, transparent 1px 5px),
+    linear-gradient(168deg, #fbf6e8 0%, #f4edd8 55%, #ece4cc 100%) !important;
+}
+
+.km-node-display .control-bar {
+  background: rgba(251, 246, 232, 0.9) !important;
+  border: 1px solid rgba(var(--forest-rgb), 0.26) !important;
+  border-radius: 20px 8px 20px 8px !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.9) inset,
+    0 10px 24px -20px rgba(var(--forest-deep-rgb), 0.5);
+}
+
+/* 叶片挪到左下角，压在数据区外侧，才看得见 */
+.km-node-card::after {
+  right: 2px;
+  left: auto;
+  bottom: 2px;
+  width: 68px;
+  height: 68px;
+  opacity: 0.3;
+  transform: rotate(-18deg);
+}
+
+/* 数据行做极淡的斑马纹，长列表更好扫 */
+.km-node-card > div > div > div:not(:first-child) {
+  border-radius: 6px;
+}
+.km-node-card .km-usage-bar {
+  padding: 2px 0;
+}
+
+/* 数据行之间加极淡的虚线，像账本 */
+.km-node-card .rt-Separator,
+.km-node-card hr {
+  border-top: 1px dashed rgba(var(--forest-rgb), 0.26) !important;
+}
+
+/* ---------- 探针卡片：状态点 / 时长胶囊 / 2x2 指标 / 小方块 ---------- */
+
+.km-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
+  display: inline-block;
+}
+.km-status-dot.is-online {
+  background: #4caf6e;
+  box-shadow: 0 0 0 3px rgba(76, 175, 110, 0.18);
+}
+.km-status-dot.is-offline {
+  background: #c05a4a;
+  box-shadow: 0 0 0 3px rgba(192, 90, 74, 0.16);
+}
+
+.km-uptime-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #5c5545;
+  background: rgba(120, 100, 70, 0.07);
+  border: 1px solid rgba(var(--forest-rgb), 0.22);
+  white-space: nowrap;
+}
+.km-uptime-pill.is-offline {
+  color: #8c3a2c;
+  background: rgba(192, 90, 74, 0.08);
+  border-color: rgba(192, 90, 74, 0.3);
+}
+
+.km-metric-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 11px 16px;
+}
+
+.km-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.km-metric-head {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.km-metric-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.km-tone-sky .km-metric-icon { color: #4a7fa8; }
+.km-tone-moss .km-metric-icon { color: #4a9d5f; }
+.km-tone-clay .km-metric-icon { color: #b3763a; }
+.km-tone-plum .km-metric-icon { color: #7a5a9c; }
+
+.km-metric-label {
+  flex: 1;
+  min-width: 0;
+  color: #6b6350;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.km-metric-value {
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+.km-metric-bar {
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(120, 100, 70, 0.13);
+  overflow: hidden;
+}
+
+.km-metric-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.5s cubic-bezier(0.22, 0.9, 0.28, 1);
+}
+
+.km-metric-detail {
+  font-size: 10.5px;
+  line-height: 1.35;
+  color: #8a8270;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.km-level-ok { color: #3d5a3a; }
+.km-metric-fill.km-level-ok { background: linear-gradient(90deg, #86cf9a, #4a9d5f); }
+.km-level-warn { color: #9a6620; }
+.km-metric-fill.km-level-warn { background: linear-gradient(90deg, #e6bb६8, #c98a2e); }
+.km-level-high { color: #b33a2b; }
+.km-metric-fill.km-level-high { background: linear-gradient(90deg, #e58a76, #c0442f); }
+.km-level-critical { color: #8c1f14; }
+.km-metric-fill.km-level-critical { background: linear-gradient(90deg, #c0392b, #7d1a10); }
+
+.km-tile-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.km-tile {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 7px 9px;
+  border-radius: 12px 5px 12px 5px;
+  background: rgba(255, 253, 246, 0.72);
+  border: 1px solid rgba(var(--forest-rgb), 0.2);
+  font-size: 11px;
+  min-width: 0;
+}
+
+.km-tile-label {
+  font-size: 10px;
+  color: #8a8270;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.km-tile-line {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #4a4436;
+}
+.km-tile-line.km-up { color: #3f7d4f; }
+.km-tile-line.km-down { color: #4a6b8a; }
+.km-tile-line.km-muted { color: #8a8270; }
+
+.km-conn-row {
+  border-top: 1px dashed rgba(var(--forest-rgb), 0.22);
+  padding-top: 6px;
 }
